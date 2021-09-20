@@ -2,4 +2,10 @@
 comment0.target=Jmart
 comment1.params=args
 comment1.target=void\ main(java.lang.String[])
-numComments=2
+comment2.params=
+comment2.target=Product\ createProduct()
+comment3.params=
+comment3.target=Coupun\ createCoupun()
+comment4.params=
+comment4.target=ShipmentDuration\ createShipmentDuration()
+numComments=5
