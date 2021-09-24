@@ -6,21 +6,30 @@ package zahraJmartRK;
     
 public class Jmart
 {
-    public static void main(String[] args)
+    public void main(String[] args)
     {
 
     }
 
-    public static Product createProduct()
+    
+    public static Product createProduct(){
+        PriceTag priceTag = new PriceTag(20000);
+        Product product = new Product("BUMPER",2,false,priceTag,
+        ProductCategory.AUTOMOTIVE);
+        return product;
+    }
+    
+    public static Coupon createCoupon()
     {
-        return null;
+       Coupon coupon = new Coupon("SummerSale 2K21",1, Coupon.Type.DISCOUNT, 20, 50000);
+       return coupon;
     }
 
-    public static Coupun createCoupun()
+    public static ShipmentDuration createshipmentDuration (String args[])
     {
-        return null;
-        }
-
+        return new ShipmentDuration(ShipmentDuration.REGULER, ShipmentDuration.INSTANT);
+    }
+    
     public static ShipmentDuration createShipmentDuration()
     {
         return null;

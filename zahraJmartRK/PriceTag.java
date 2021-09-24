@@ -17,6 +17,7 @@ public class PriceTag
     
     public PriceTag(double price){
         this.price = price;
+        this.discount = 0.0;
     }
     
     public PriceTag(double price, double discount){
@@ -25,13 +26,15 @@ public class PriceTag
     }
     
     private double getDiscountedPrice(){
-    if (discount>=100){
-        return 0;
-    }
-    else{
-        double totalPrice = price - (price * (discount/100));
-        return totalPrice;
-    }
+         if (discount > 100.0){
+            discount = 100.0;
+        }
+        if (discount == 100.0){
+            return 0.0;
+        }
+        else{
+            return price * ((100.0 - discount)/100.0);
+        }
     }
     
     public double getAdminFee(){
@@ -41,7 +44,7 @@ public class PriceTag
             return BOTTOM_FEE;    
         }
         
-        return discounted - COMMISSION_MULTIPLIER;
+        return discounted * COMMISSION_MULTIPLIER;
     }
     
     public double getAdjustedPrice(){

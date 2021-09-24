@@ -7,7 +7,7 @@ package zahraJmartRK;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Coupun
+public class Coupon
 {    
    private boolean used;
    public final String name;
@@ -21,14 +21,14 @@ public class Coupun
        REBATE
    }
    
-    public Coupun(String name, int code, Type type, double cut, double minimum){
+    public Coupon(String name, int code, Type type, double cut, double minimum){
         this.name = name;
         this.code = code;
         this.type = type;
         this.cut = cut;
         this.minimum = minimum;
         this.used = false;
-    }
+   }
     
     public boolean isUsed(){
        return used;
@@ -43,15 +43,17 @@ public class Coupun
        }
     }
         
-    public double apply(PriceTag priceTag){
+    public double apply (PriceTag priceTag){
        used = true;
        
        if (type == Type.DISCOUNT){
-            return (priceTag.getAdjustedPrice() * ((100 - cut)/100));
+           return (100 - cut) / 100 * priceTag.getAdjustedPrice();
+       }
+       else if (type == Type.REBATE){
+           return priceTag.getAdjustedPrice() - priceTag.price;
        }
        else{
-           return (priceTag.getAdjustedPrice() - cut);
+           return 0.0;
        }
    }
-    
 }

@@ -24,6 +24,7 @@ public class Product
         this.conditionUsed = conditionUsed;
         this.pricetag = pricetag;
         this.category = category;
+        this.rating = new ProductRating();
         id = idCounter;
         idCounter++;
      }
