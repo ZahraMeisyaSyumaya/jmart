@@ -12,12 +12,7 @@ public class Jmart
     }
 
     
-    public static Product createProduct(){
-        PriceTag priceTag = new PriceTag(20000);
-        Product product = new Product("BUMPER",2,false,priceTag,
-        ProductCategory.AUTOMOTIVE);
-        return product;
-    }
+    
     
     public static Coupon createCoupon()
     {
