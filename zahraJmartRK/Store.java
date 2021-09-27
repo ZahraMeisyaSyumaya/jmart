@@ -29,7 +29,15 @@ public class Store extends Recognizable implements FileParser
         this.phoneNumber = phoneNumber;
     }
     
+    @Override
     public boolean read(String content){
         return false;
+    }
+    public String toString(){
+        return(
+            "Name: " + this.name +"\n" +
+            "address: " + this.address + "\n" +
+            "phoneNumber: " + this.phoneNumber+ "\n"
+        );
     }
 }

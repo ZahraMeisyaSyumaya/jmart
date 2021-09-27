@@ -7,7 +7,7 @@ package zahraJmartRK;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Recognizable
+public abstract class Recognizable
 {
     public final int id;
 

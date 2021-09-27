@@ -12,7 +12,9 @@ public class Jmart
     }
 
     
-    
+    public static Product createProduct(){
+        return null;
+    }
     
     public static Coupon createCoupon()
     {
@@ -20,12 +22,12 @@ public class Jmart
        return coupon;
     }
 
-    public static ShipmentDuration createshipmentDuration (String args[])
+    public static Shipment createshipment (String args[])
     {
-        return new ShipmentDuration(ShipmentDuration.REGULER, ShipmentDuration.INSTANT);
+        return null;
     }
     
-    public static ShipmentDuration createShipmentDuration()
+    public static Shipment createShipment()
     {
         return null;
     }

@@ -1,12 +1,5 @@
 package zahraJmartRK;
 
-
-/**
- * Write a description of class Coupun here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
 public class Coupon
 {    
    private boolean used;
