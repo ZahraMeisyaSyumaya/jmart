@@ -8,7 +8,7 @@ package zahraJmartRK;
  * @version (a version number or a date)
  */
 
-public abstract class Product extends Recognizable implements FileParser
+public class Product extends Recognizable implements FileParser
 {
     private static int idCounter;
     public int id;
