@@ -24,16 +24,21 @@ public class Payment extends Invoice implements Transactor
         return 0.0;
     }
     
+    @Override
     public boolean validate() {
         return false;
     }
-
+    
+    @Override
     public Invoice perform() {
         return null;
     }
     
+    /* 
+     * 
     @Override
     public boolean read(String content){
         return false;
     }
+    */
 }

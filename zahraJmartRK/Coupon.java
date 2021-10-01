@@ -1,6 +1,6 @@
 package zahraJmartRK;
 
-public class Coupon
+public abstract class Coupon extends Recognizable implements FileParser
 {    
    private boolean used;
    public final String name;
@@ -14,7 +14,8 @@ public class Coupon
        REBATE
    }
    
-    public Coupon(String name, int code, Type type, double cut, double minimum){
+    public Coupon(int id, String name, int code, Type type, double cut, double minimum){
+        super(id);
         this.name = name;
         this.code = code;
         this.type = type;
@@ -49,4 +50,8 @@ public class Coupon
            return 0.0;
        }
    }
+   @Override
+    public boolean read(String content){
+        return false;
+    }
 }

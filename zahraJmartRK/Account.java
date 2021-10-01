@@ -29,7 +29,16 @@ public class Account extends Recognizable implements FileParser
         return false;
     }
 
+
     @Override
+    public String toString(){
+        return(
+            "name: " + this.name +"\n" + "email: " + this.email + "\n" + "password: " + this.password + "\n"
+        );
+    }
+
+    /*
+     * @Override
     public Object write()
     {
         return null;
@@ -39,13 +48,5 @@ public class Account extends Recognizable implements FileParser
     {
         return null;
     }
-
-    public String toString(){
-        return(
-            "name: " + this.name +"\n" +
-            "email: " + this.email + "\n" +
-            "password: " + this.password + "\n"
-        );
-    }
-
+     */
 }

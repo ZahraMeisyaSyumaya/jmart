@@ -15,7 +15,10 @@ public class Shipment implements FileParser
     public String receipt;
     
     public Shipment(String address, int shipmentCost, Duration duration, String receipt){
-
+        this.address = address;
+        this.shipmentCost = shipmentCost;
+        this.duration = duration;
+        this.receipt = receipt;
     }
     
     public boolean read(String content){

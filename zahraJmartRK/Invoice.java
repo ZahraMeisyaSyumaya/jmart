@@ -8,7 +8,8 @@ package zahraJmartRK;
  * @version (a version number or a date)
  */
 public abstract class Invoice extends Recognizable implements FileParser{
-    public enum Status{
+    
+    enum Status{
         WAITING_CONFIRMATION,
         CANCELLED,
         ON_PROGRESS,
@@ -36,12 +37,12 @@ public abstract class Invoice extends Recognizable implements FileParser{
         super(id);
         this.buyerId = buyerId;
         this.productId = productId;
-        this.date = "tanggal";
+        this.date = "sunday";
         this.rating = Rating.NONE;
         this.status = status.WAITING_CONFIRMATION;
     }
 
-    abstract double getTotalPay();
+    public abstract double getTotalPay();
     
     @Override
     public boolean read(String content){

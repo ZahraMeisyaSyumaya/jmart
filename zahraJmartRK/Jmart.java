@@ -18,16 +18,10 @@ public class Jmart
     
     public static Coupon createCoupon()
     {
-       Coupon coupon = new Coupon("SummerSale 2K21",1, Coupon.Type.DISCOUNT, 20, 50000);
-       return coupon;
-    }
-
-    public static Shipment createshipment (String args[])
-    {
-        return null;
+       return null;
     }
     
-    public static Shipment createShipment()
+    public static Shipment.Duration createShipmentDuration()
     {
         return null;
     }

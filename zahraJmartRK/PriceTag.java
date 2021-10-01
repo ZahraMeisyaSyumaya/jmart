@@ -9,7 +9,7 @@ package zahraJmartRK;
  */
 public class PriceTag
 {
-    public static final double COMMISSION_MULTIPLIER = 0.05d;
+    public static final double COMMISSION_MULTIPLIER = 0.05;
     public static final double BOTTOM_PRICE = 20000;
     public static final double BOTTOM_FEE = 1000;
     public double price;
