@@ -10,7 +10,7 @@ public class Jmart
 {
     public static void main (String[] args)
     {
-     System.out.println(Shipment.Duration.KARGO.getEstimatedArrival(new Date()));          
+     System.out.println(Shipment.Duration.INSTANT.getEstimatedArrival(new Date()));          
     }
     
     /*public void main(String[] args)
