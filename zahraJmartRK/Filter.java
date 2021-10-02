@@ -9,9 +9,6 @@ import java.util.ArrayList;
  */
 public class Filter
 {
-    // instance variables - replace the example below with your own
-    private Filter(){    }
-
     public static ArrayList<PriceTag> filterPriceTag(PriceTag[] list, double value, boolean less){
         ArrayList<PriceTag> priceTags = new ArrayList<>();
         for (PriceTag a : list){
