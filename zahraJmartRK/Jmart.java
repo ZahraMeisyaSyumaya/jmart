@@ -10,28 +10,14 @@ public class Jmart
 {
     public static void main (String[] args)
     {
-     System.out.println(Shipment.Duration.INSTANT.getEstimatedArrival(new Date()));          
+        System.out.println(Shipment.Duration.INSTANT.getEstimatedArrival(new Date())); 
+     
+        Account account = new Account(80,"hiu keren","zahra@gmail.com","aqhiu");
+        account.validate();
+        System.out.print(account);
+        
+        Complaint complaint = new Complaint (22, "mau komplen nih");
+        System.out.print(complaint);
     }
-    
-    /*public void main(String[] args)
-    {
-
-    }
-
-    
-    public static Product createProduct(){
-        return null;
-    }
-    
-    public static Coupon createCoupon()
-    {
-       return null;
-    }
-    
-    public static Shipment.Duration createShipmentDuration()
-    {
-        return null;
-    }
-    */
-}  
+}
         

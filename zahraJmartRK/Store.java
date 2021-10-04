@@ -45,11 +45,17 @@ public class Store extends Recognizable implements FileParser
     }
     
     public boolean validate() {
-        Pattern patternA = Pattern.compile(REGEX_NAME);
-        Matcher matcherA = patternA.matcher(name);
-        Pattern patternB = Pattern.compile(REGEX_PHONE);
-        Matcher matcherB = patternB.matcher(phoneNumber);
-        return matcherA.find() && matcherB.find();
+        Pattern namePattern = Pattern.compile(REGEX_NAME);
+        Matcher nameMatcher = namePattern.matcher(this.name);
+        Pattern telpPattern = Pattern.compile(REGEX_PHONE);
+        Matcher telpMatcher = telpPattern.matcher(this.phoneNumber);
+        boolean nameMatch = nameMatcher.find();
+        boolean telpMatch = telpMatcher.find();
+        
+        if(nameMatch == true && telpMatch == true){
+            return true;
+        }
+        return false;
     }
 
 }
