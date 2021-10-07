@@ -45,7 +45,7 @@ public class Account extends Recognizable implements FileParser
     }
     
     public boolean validate() {
-        Pattern passwordPattern = Pattern.compile(REGEX_PASSWORD);
+        Pattern passwordPattern = Patern.compile(REGEX_PASSWORD);
         Matcher passwordMatcher = passwordPattern.matcher(this.password);
         Pattern emailPattern = Pattern.compile(REGEX_EMAIL);
         Matcher emailMatcher = emailPattern.matcher(this.email);
