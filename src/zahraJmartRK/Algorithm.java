@@ -6,6 +6,7 @@ public class Algorithm {
     private Algorithm() {
     }
 
+    
     public static <T> int count(T[] array, T value) {
         int count = 0;
         Predicate predicate = (arg) -> {
@@ -18,7 +19,7 @@ public class Algorithm {
         for (T arrayValue : array) {
             if (predicate.predicate(arrayValue)) {
                 count++;
-            }   
+            }
         }
         return count;
     }
