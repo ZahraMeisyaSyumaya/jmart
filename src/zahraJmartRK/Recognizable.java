@@ -16,6 +16,10 @@ public abstract class Recognizable
         this.id = id;
     }
 
+    public int compareTo(Recognizable other) {
+        return (this.id < other.id) ? -1 : ((this.id == other.id) ? 0 : 1);
+    }
+
     public boolean equals(Object objek)
     {
         if (objek instanceof Recognizable)
@@ -34,4 +38,13 @@ public abstract class Recognizable
             return false;
         }
     }
+
+    public static <T extends Recognizable> int setClosingId(Class<T> clazz, int id) {
+        return 0;
+    }
+
+    public static <T extends Recognizable> int getClosingId(Class<T> clazz) {
+        return 0;
+    }
+
 }
