@@ -1,12 +1,13 @@
 package zahraJmartRK;
 import java.util.*;
+import java.util.Iterator;
 
 public class Algorithm {
     private Algorithm() {
     }
 
     public static <T> int count(T[] array, T value) {
-        int counter = 0;
+        int count = 0;
         Predicate predicate = (arg) -> {
             if (value == arg) {
                 return true;
@@ -16,10 +17,10 @@ public class Algorithm {
         };
         for (T arrayValue : array) {
             if (predicate.predicate(arrayValue)) {
-                counter++;
-            }
+                count++;
+            }   
         }
-        return counter;
+        return count;
     }
 
     public static <T> int count(Iterable<T> iterable, T value) {
