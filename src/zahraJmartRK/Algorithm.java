@@ -58,7 +58,7 @@ public class Algorithm {
         }
         return i;
     }
-    public static <T> boolean exist(T[] array, T value) {
+    public static <T> boolean exists(T[] array, T value) {
         for(T arrayValue : array){
             if (arrayValue.equals(value)){
                 return true;
@@ -66,7 +66,7 @@ public class Algorithm {
         }
         return false;
     }
-    public static <T> boolean exist(Iterable<T> iterable, T value) {
+    public static <T> boolean exists(Iterable<T> iterable, T value) {
         for(T t : iterable){
             if(t.equals(value)){
                 return true;
@@ -74,7 +74,7 @@ public class Algorithm {
         }
         return false;
     }
-    public static <T> boolean exist(Iterator<T> iterator, T value) {
+    public static <T> boolean exists(Iterator<T> iterator, T value) {
         while(iterator.hasNext()){
             if(iterator.next().equals(value)){
                 return true;
@@ -82,7 +82,7 @@ public class Algorithm {
         }
         return false;
     }
-    public static <T> boolean exist(T[] array, Predicate<T> pred) {
+    public static <T> boolean exists(T[] array, Predicate<T> pred) {
         for(T arrayValue : array){
             if (arrayValue.equals(pred)){
                 return true;
@@ -90,7 +90,7 @@ public class Algorithm {
         }
         return false;
     }
-    public static <T> boolean exist(Iterable<T> iterable, Predicate<T> pred) {
+    public static <T> boolean exists(Iterable<T> iterable, Predicate<T> pred) {
         for(T t : iterable){
             if(t.equals(pred)){
                 return true;
@@ -98,7 +98,7 @@ public class Algorithm {
         }
         return false;
     }
-    public static <T> boolean exist(Iterator<T> iterator, Predicate<T> pred) {
+    public static <T> boolean exists(Iterator<T> iterator, Predicate<T> pred) {
         while(iterator.hasNext()){
             if(iterator.next().equals(pred)){
                 return true;
