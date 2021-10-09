@@ -1,6 +1,6 @@
 package zahraJmartRK;
 
-public class Recognizable
+public class Recognizable implements Comparable<Recognizable>
 {
     public final int id;
 
@@ -9,6 +9,7 @@ public class Recognizable
         this.id = id;
     }
 
+    @Override
     public int compareTo(Recognizable other) {
         return (this.id < other.id) ? -1 : ((this.id == other.id) ? 0 : 1);
     }
