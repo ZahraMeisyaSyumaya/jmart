@@ -1,6 +1,6 @@
 package zahraJmartRK;
 
-public abstract class Coupon extends Recognizable implements FileParser
+public abstract class Coupon extends Recognizable
 {    
    private boolean used;
    public final String name;
@@ -27,31 +27,35 @@ public abstract class Coupon extends Recognizable implements FileParser
     public boolean isUsed(){
        return used;
    }
-    
-   public boolean canApply(PriceTag priceTag){
-       if ((priceTag.getAdjustedPrice() >= minimum) && (used == false)){
-           return true;
-       }    
-       else{
-           return false;
-       }
+
+    public boolean canApply(double price)
+    {
+        if(Treasury.getAdjustedPrice(price, cut) >= minimum && !used){
+            return true;
+        }else{
+            return false;
+        }
     }
-        
-    public double apply (PriceTag priceTag){
-       used = true;
-       
-       if (type == Type.DISCOUNT){
-           return (100 - cut) / 100 * priceTag.getAdjustedPrice();
-       }
-       else if (type == Type.REBATE){
-           return priceTag.getAdjustedPrice() - priceTag.price;
-       }
-       else{
-           return 0.0;
-       }
-   }
-   @Override
-    public boolean read(String content){
+
+    public double apply(Treasury priceTag)
+    {
+        double finalPrice = 0.00;
+        this.used = true;
+        if(this.type == Type.DISCOUNT)
+        {
+            return (priceTag.getAdjustedPrice(1000.0, 5.0) * (100 - this.cut)/100);
+        }
+        else if(type == Type.REBATE)
+        {
+            return (priceTag.getAdjustedPrice(1000.0, 5.0) - cut);
+        }
+        else
+        {
+            return finalPrice;
+        }
+    }
+   /* public boolean read(String content){
         return false;
     }
+    */
 }

@@ -2,14 +2,7 @@ package zahraJmartRK;
 import java.util.regex.*;
 import java.util.regex.Pattern;
 
-/**
- * Write a description of class Account here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
-
-public class Account extends Recognizable implements FileParser
+public class Account extends Recognizable
 {
     public static final String REGEX_EMAIL = "^[a-zA-Z0-9&*_~]+(\\.[a-zA-Z0-9&*_~]+)*@[a-zA-Z0-9][a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*$";
     public static final String REGEX_PASSWORD = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?!.* ).{8,}$";
@@ -23,7 +16,7 @@ public class Account extends Recognizable implements FileParser
         this.email = email;
         this.password = password;
     }
-    
+    /*
     @Override
     public boolean read(String content){
         return false;
@@ -43,6 +36,8 @@ public class Account extends Recognizable implements FileParser
             "password: " + this.password + "\n"
         );
     }
+
+     */
     
     public boolean validate() {
         Pattern passwordPattern = Pattern.compile(REGEX_PASSWORD);

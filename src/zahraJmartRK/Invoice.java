@@ -3,13 +3,8 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-/**
- * Write a description of class Invoice here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
-public abstract class Invoice extends Recognizable implements FileParser{
+
+public abstract class Invoice extends Recognizable{
     
     enum Status{
         WAITING_CONFIRMATION,
@@ -47,11 +42,11 @@ public abstract class Invoice extends Recognizable implements FileParser{
 
     public abstract double getTotalPay();
     
-    @Override
+   /*
     public boolean read(String content){
         return false;
     }
-    
+    */
     
     class Record{
         public Status status;

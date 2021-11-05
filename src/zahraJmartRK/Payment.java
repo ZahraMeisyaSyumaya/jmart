@@ -8,7 +8,7 @@ package zahraJmartRK;
  * @version (a version number or a date)
  */
 
-public class Payment extends Invoice implements Transactor
+public class Payment extends Invoice
 {
     public Shipment shipment;
     public int productCount;
@@ -23,7 +23,7 @@ public class Payment extends Invoice implements Transactor
     public double getTotalPay() {
         return 0.0;
     }
-    
+    /*
     @Override
     public boolean validate() {
         return false;
@@ -33,9 +33,7 @@ public class Payment extends Invoice implements Transactor
     public Invoice perform() {
         return null;
     }
-    
-    /* 
-     * 
+
     @Override
     public boolean read(String content){
         return false;

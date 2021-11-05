@@ -1,7 +1,8 @@
 package zahraJmartRK;
 
+@FunctionalInterface
 public interface Predicate<T> {
-    boolean predicate(T arg);
+    public boolean predicate(T arg);
 }
 
 

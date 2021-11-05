@@ -23,7 +23,15 @@ public class ProductRating
     }
     
     public double getAverage(){
-        return ((double) total/count);
+        if(count < 1)
+        {
+            return 0.00;
+        }
+        else
+        {
+            double averageRating = (this.total) / (this.count);
+            return averageRating;
+        }
     }
     
     public long getCount(){
