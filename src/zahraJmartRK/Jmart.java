@@ -1,6 +1,12 @@
 package zahraJmartRK;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.List;
+import com.google.gson.*;
 
 // Zahra Meisya Syumaya
 // 1906300870    
@@ -8,16 +14,27 @@ import java.util.Date;
     
 public class Jmart
 {
-    public static void main (String[] args)
+    class Country
     {
-        System.out.println(Shipment.Duration.INSTANT.getEstimatedArrival(new Date())); 
-     
-        Account account = new Account(80,"hiu keren","zahra@gmail.com","aqhiu");
-        account.validate();
-        System.out.print(account);
-        
-        Complaint complaint = new Complaint (22, "mau komplen nih");
-        System.out.print(complaint);
+        public String name;
+        public int population;
+        public List<String> listOfStates;
+    }
+
+    public static void main(String[] args){
+        String filepath = "/Users/Zahra/repo baru/jmart/city.json";
+        Gson gson = new Gson();
+        try{
+            BufferedReader br = new BufferedReader(new FileReader(filepath));
+            Country input = gson.fromJson(br, Country.class);
+            System.out.println("name: " + input.name);
+            System.out.println("population: " + input.population);
+            System.out.println("states:");
+            input.listOfStates.forEach(state -> System.out.println(state));
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
     }
 }
         
