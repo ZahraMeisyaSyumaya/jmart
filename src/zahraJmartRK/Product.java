@@ -1,26 +1,25 @@
 package zahraJmartRK;
 
-public class Product extends Recognizable
+public class Product extends Serializable
 {
     public int accountId;
-    public String name;
-    public int weight;
     public boolean conditionUsed;
-    public ProductCategory category;
-    public double price;
     public double discount;
+    public ProductCategory category;
+    public String name;
+    public double price;
     public byte shipmentPlans;
+    public int weight;
 
-    public Product(int id, int accountId, String name, int weight, boolean conditionUsed, double price, double discount, ProductCategory category, byte shipmentPlans)
+    public Product(int accountId, String name, int weight, boolean conditionUsed, double price, double discount, ProductCategory category, byte shipmentPlans)
     {
-        super(id);
-        this.accountId = accountId;
         this.name = name;
         this.weight = weight;
         this.conditionUsed = conditionUsed;
+        this.category = category;
+        this.accountId = accountId;
         this.price = price;
         this.discount = discount;
-        this.category = category;
         this.shipmentPlans = shipmentPlans;
     }
 

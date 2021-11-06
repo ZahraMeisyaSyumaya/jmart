@@ -26,8 +26,7 @@ public class Treasury {
         }
         if(discount == 100.0){
             return 0.0;
-        }else{
-            return price * ((100.0 - discount)/100.0);
         }
+        else{ return price * ((100.0 - discount)/100.0); }
     }
 }

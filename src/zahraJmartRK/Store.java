@@ -2,45 +2,31 @@ package zahraJmartRK;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Store extends Recognizable
+public class Store extends Serializable
 {
-    public static final String REGEX_PHONE = "^\\d{9, 12}$";
-    public static final String REGEX_NAME = "^[A-Z](?!.*(\\s)\\1).{4,20}$";
+    public static final String REGEX_PHONE = "^(/d{9,12})$";
+    public static final String REGEX_NAME = "^(?=^[A-Z])(?![A-Z a-z]{20,})((?=[A-Z a-z]{4,}).)((?!\\s{2}).)*$";
     public String name;
     public String address;
     public double balance;
     public String phoneNumber;
 
-    public Store(int id, String name, String address, String phoneNumber, double balance)
-    {
-        super(id);
+    public Store(String name, String address, String phoneNumber, double balance){
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.balance = balance;
     }
 
-    @Override
     public String toString(){
-        return(
-            "name: " + this.name +"\n" +
-            "address: " + this.address + "\n" +
-            "phoneNumber: " + this.phoneNumber + "\n"
-        );
+        return "name: " + (String)this.name + "\n" + "address: " + (String)this.address + "\n" + "Phone Number" + (String)this.phoneNumber;
     }
-    
-    public boolean validate() {
-        Pattern namePattern = Pattern.compile(REGEX_NAME);
-        Matcher nameMatcher = namePattern.matcher(this.name);
-        Pattern telpPattern = Pattern.compile(REGEX_PHONE);
-        Matcher telpMatcher = telpPattern.matcher(this.phoneNumber);
-        boolean nameMatch = nameMatcher.find();
-        boolean telpMatch = telpMatcher.find();
-        
-        if(nameMatch == true && telpMatch == true){
-            return true;
-        }
-        return false;
+    public boolean validate(){
+        Pattern pattern = Pattern.compile(REGEX_PHONE);
+        Matcher matcher = pattern.matcher(this.phoneNumber);
+        Pattern pattern1 = Pattern.compile(REGEX_NAME);
+        Matcher matcher1 = pattern1.matcher(this.name);
+        return matcher.find() && matcher1.find();
     }
 
 }

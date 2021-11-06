@@ -9,9 +9,9 @@ import java.util.List;
 import com.google.gson.*;
 
 // Zahra Meisya Syumaya
-// 1906300870    
+// 1906300870
 
-    
+
 public class Jmart
 {
     class Country
@@ -37,4 +37,3 @@ public class Jmart
         }
     }
 }
-        

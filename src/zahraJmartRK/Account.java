@@ -2,43 +2,25 @@ package zahraJmartRK;
 import java.util.regex.*;
 import java.util.regex.Pattern;
 
-public class Account extends Recognizable
+public class Account extends Serializable
 {
     public static final String REGEX_EMAIL = "^[a-zA-Z0-9&*_~]+(\\.[a-zA-Z0-9&*_~]+)*@[a-zA-Z0-9][a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*$";
     public static final String REGEX_PASSWORD = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?!.* ).{8,}$";
+    public double balance;
     public String name;
     public String email;
     public String password;
+    public Store store;
 
-    public Account(int id, String name, String email, String password){
-        super(id);
+    public Account(String name, String email, String password, double balance)
+    {
+        this.balance = balance;
         this.name = name;
         this.email = email;
         this.password = password;
     }
-    /*
-    @Override
-    public boolean read(String content){
-        return false;
-    }
-    
-    @Override
-    public Object write()
-    {
-        return null;
-    }
 
-    @Override
-    public String toString(){
-        return(
-            "name: " + this.name +"\n" +
-            "email: " + this.email + "\n" +
-            "password: " + this.password + "\n"
-        );
-    }
 
-     */
-    
     public boolean validate() {
         Pattern passwordPattern = Pattern.compile(REGEX_PASSWORD);
         Matcher passwordMatcher = passwordPattern.matcher(this.password);
@@ -46,10 +28,13 @@ public class Account extends Recognizable
         Matcher emailMatcher = emailPattern.matcher(this.email);
         boolean passwordMatch = passwordMatcher.find();
         boolean emailMatch = emailMatcher.find();
-        
+
         if(passwordMatch == true && emailMatch == true){
             return true;
         }
         return false;
     }
 }
+
+
+
