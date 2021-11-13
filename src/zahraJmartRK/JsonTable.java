@@ -16,15 +16,15 @@ public class JsonTable <T> extends Vector{
     }
 
     public static<T> JsonReader readJson(Class<T> clazz, String filepath) throws FileNotFoundException {
-        T read = null;
+        T baca = null;
         try {
             final JsonReader reader = new JsonReader(new FileReader(filepath));
-            read = gson.fromJson(reader, clazz);
+            baca = gson.fromJson(reader, clazz);
         }
         catch (IOException e) {
             e.printStackTrace();
         }
-        return (JsonReader) read;
+        return (JsonReader) baca;
     }
 
     public void writeJson() throws IOException {
