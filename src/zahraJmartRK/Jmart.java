@@ -16,6 +16,10 @@ import java.util.stream.Collectors;
 
 class Jmart
 {
+
+
+
+
     public static List<Product> filterByAccountId(List<Product> list, int accountId, int page, int pageSize) {
         Predicate<Product> predicate = acc -> (acc.accountId == accountId);
         return paginate(list, page, pageSize, predicate);
@@ -61,14 +65,10 @@ class Jmart
         try{
 
             List<Product> list = read("C:/Users/Zahra/repo baru/jmart/randomProductList.json");
-            /*
-            List<Product> priceOutput = filterByPrice(list, 1000.0, 15000.0);
-            priceOutput.forEach(product -> System.out.println(product.price));
-             */
-            //name
+
             List<Product> nameOutput = filterByName(list, "gtx", 1, 5);
             nameOutput.forEach(product -> System.out.println(product.name));
-            //account
+
             List<Product> accountOutput = filterByAccountId(list, 2, 1, 5);
             accountOutput.forEach(product -> System.out.println(product.name));
 
@@ -104,5 +104,7 @@ class Jmart
         }
         return products;
     }
+
+    
 
 }
