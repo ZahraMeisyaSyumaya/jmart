@@ -7,39 +7,34 @@ import java.util.Vector;
 import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 
-public class JsonTable <T> extends Vector{
+public class JsonTable<T> extends Vector<T>{
     public final String filepath;
     private static final Gson gson = new Gson();
 
-    public JsonTable(Class<T> clazz, String filepath) throws IOException{
+    public JsonTable(Class<T> clazz, String filepath) throws IOException {
         this.filepath = filepath;
+        File f = new File(filepath);
+        f.getParentFile().mkdirs();
+        f.createNewFile();
+        Class<T[]> arrayType = (Class<T[]>) Array.newInstance(clazz, 0).getClass();
+        T[] loaded = readJson(arrayType, filepath);
+    }
+    public static <T> T readJson(Class<T> clazz, String filepath) throws FileNotFoundException{
+        T reader;
+        FileReader freader = new FileReader(filepath);
+        reader  = gson.fromJson(freader, clazz);
+        return reader;
     }
 
-    public static<T> JsonReader readJson(Class<T> clazz, String filepath) throws FileNotFoundException {
-        T baca = null;
-        try {
-            final JsonReader reader = new JsonReader(new FileReader(filepath));
-            baca = gson.fromJson(reader, clazz);
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-        return (JsonReader) baca;
-    }
 
-    public void writeJson() throws IOException {
-        writeJson(this,this.filepath);
+    public void writeJson() throws IOException{
+        writeJson(this, this.filepath);
     }
-
-    public static void writeJson(Object object, String filepath) throws IOException {
-        try{
-            FileWriter writer = new FileWriter(filepath);
-            String json = gson.toJson(object);
-            writer.write(json);
-            writer.close();
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
+    public static void writeJson(Object object, String filepath) throws IOException{
+        FileWriter writer = new FileWriter(filepath);
+        String json = gson.toJson(object);
+        writer.write(json);
+        writer.close();
     }
 }
+

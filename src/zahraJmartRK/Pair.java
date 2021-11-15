@@ -5,8 +5,6 @@ public class Pair<T, U> {
     public U second;
 
     public Pair() {
-        this.first = null;
-        this.second = null;
     }
 
     public Pair(T first, U second) {

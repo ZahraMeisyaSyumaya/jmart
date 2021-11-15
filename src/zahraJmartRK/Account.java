@@ -12,9 +12,7 @@ public class Account extends Serializable
     public String password;
     public Store store;
 
-    public Account(String name, String email, String password, double balance)
-    {
-        this.balance = balance;
+    public Account(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -34,7 +32,10 @@ public class Account extends Serializable
         }
         return false;
     }
+    @Override
+    public String toString(){
+        return ("name: " + name + "\nemail: " + email + "\npassword: " + password);
+    }
+
 }
-
-
 

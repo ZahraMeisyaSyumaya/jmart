@@ -6,14 +6,16 @@ public class Serializable implements Comparable<Serializable> {
     public final int id;
     private static Map<Class<?>, Integer> mapCounter = new HashMap<>();
 
-    protected Serializable() {
-        Class gotClass = getClass();
-        if (mapCounter.get(gotClass) == null) {
-            mapCounter.put(gotClass, 0);
-        } else {
-            mapCounter.put(gotClass, mapCounter.get(gotClass) + 1);
+    protected Serializable(){
+
+        Integer counter = mapCounter.get(getClass());
+        if(counter == null){
+            counter = 0;
+        }else{
+            counter = counter + 1;
         }
-        this.id = mapCounter.get(gotClass);
+        mapCounter.put(getClass(), counter);
+        this.id = counter;
     }
 
     @Override
@@ -33,6 +35,7 @@ public class Serializable implements Comparable<Serializable> {
         }
         return false;
     }
+
 
     public boolean equals(Serializable r) {
         if (this.id == r.id) {

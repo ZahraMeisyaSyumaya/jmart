@@ -1,5 +1,6 @@
 package zahraJmartRK;
-
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -10,101 +11,51 @@ import java.util.List;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
-import zahraJmartRK.Product;
-import zahraJmartRK.ProductCategory;
 import java.util.stream.Collectors;
 
-class Jmart
-{
-
-
-
-
-    public static List<Product> filterByAccountId(List<Product> list, int accountId, int page, int pageSize) {
-        Predicate<Product> predicate = acc -> (acc.accountId == accountId);
-        return paginate(list, page, pageSize, predicate);
-    }
-
-    public static List<Product> filterByCategory(List<Product> list, ProductCategory category){
-        List<Product> products = new ArrayList<>();
-        for(Product product : list){
-            if(product.category.equals(category)){
-                products.add(product);
-            }
-        }
-        return products;
-    }
-
-    public static List<Product> filterByName(List<Product> list, String search, int page, int pageSize) {
-        Predicate<Product> predicate = acc -> (acc.name.toLowerCase().contains(search.toLowerCase()));
-        return paginate(list, page, pageSize, predicate);
-    }
-
-    public static List<Product> filterByPrice(List<Product> list, double minPrice, double maxPrice){
-        List<Product> products = new ArrayList<>();
-        for(int cnt = 0; cnt < list.size(); cnt++){
-            if(minPrice <= 0.0){
-                if(list.get(cnt).price <= maxPrice){
-                    products.add(list.get(cnt));
-                }
-            }else if(maxPrice <= 0.0){
-                if(list.get(cnt).price >= minPrice){
-                    products.add(list.get(cnt));
-                }
-            }else{
-                if(list.get(cnt).price >= minPrice && list.get(cnt).price <= maxPrice){
-                    products.add(list.get(cnt));
-                }
-            }
-        }
-        return products;
-    }
-
-    public static void main(String[] args)
-    {
-        try{
-
-            List<Product> list = read("C:/Users/Zahra/repo baru/jmart/randomProductList.json");
-
-            List<Product> nameOutput = filterByName(list, "gtx", 1, 5);
-            nameOutput.forEach(product -> System.out.println(product.name));
-
-            List<Product> accountOutput = filterByAccountId(list, 2, 1, 5);
-            accountOutput.forEach(product -> System.out.println(product.name));
-
-        }catch (Throwable t)
-        {
+class Jmart {
+    public static void main(String[] args) {
+        try {
+            JsonTable<Payment> table = new JsonTable<>(Payment.class, "C:/Users/Zahra/repo baru/jmart/jmart.json");
+            ObjectPoolThread<Payment> paymentPool = new ObjectPoolThread<Payment>("Thread-PP", Jmart::paymentTimekeeper);
+            paymentPool.start();
+            table.forEach(payment -> paymentPool.add(payment));
+            while (paymentPool.size() != 0) ;
+            paymentPool.exit();
+            while (paymentPool.isAlive()) ;
+            System.out.println("Thread exited Successfully");
+            Gson gson = new Gson();
+            table.forEach(payment -> {
+                String history = gson.toJson(payment.history);
+                System.out.println(history);
+            });
+        } catch (Throwable t) {
             t.printStackTrace();
         }
     }
 
-    private static List<Product> paginate(List<Product> list, int page, int pageSize, Predicate<Product> pred) {
-        if(page < 0){
-            page = 0;
+    public static boolean paymentTimekeeper(Payment payment) {
+        Payment.Record record = payment.history.get(payment.history.size() - 1);
+        long elapsed = Math.abs(record.date.getTime() - (new Date()).getTime());
+
+        if(record.status == Invoice.Status.WAITING_CONFIRMATION && elapsed > WAITING_CONF_LIMIT_MS) {
+            payment.history.add(new Payment.Record(Invoice.Status.FAILED, "Waiting"));
+            return true;
+        } else if(record.status == Invoice.Status.ON_PROGRESS && elapsed > ON_PROGRESS_LIMIT_MS) {
+            payment.history.add(new Payment.Record(Invoice.Status.FAILED, "Progress"));
+            return true;
+        } else if(record.status == Invoice.Status.ON_DELIVERY && elapsed > ON_DELIVERY_LIMIT_MS) {
+            payment.history.add(new Payment.Record(Invoice.Status.DELIVERED, "Delivery"));
+            return false;
+        } else if(record.status == Invoice.Status.DELIVERED && elapsed > DELIVERED_LIMIT_MS) {
+            payment.history.add(new Payment.Record(Invoice.Status.FINISHED, "Finish"));
+            return true;
         }
-        if(pageSize < 0){
-            pageSize = 0;
-        }
-        return list.stream().filter(acc -> pred.predicate(acc)).skip(page * pageSize).limit(pageSize).collect(Collectors.toList());
+        return false;
     }
 
-
-
-    public static List<Product> read(String filepath) throws FileNotFoundException {
-        List<Product> products = new ArrayList<>();
-        try{
-            Gson gson = new Gson();
-            JsonReader reader = new JsonReader(new FileReader(filepath));
-            reader.beginArray();
-            while(reader.hasNext()){
-                products.add(gson.fromJson(reader, Product.class));
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return products;
-    }
-
-
-
+    public static long DELIVERED_LIMIT_MS = 3;
+    public static long ON_DELIVERY_LIMIT_MS = 3;
+    public static long ON_PROGRESS_LIMIT_MS = 3;
+    public static long WAITING_CONF_LIMIT_MS = 3;
 }
