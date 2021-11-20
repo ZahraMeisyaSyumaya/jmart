@@ -1,4 +1,6 @@
 package com.zahraJmartRK;
+import com.zahraJmartRK.dbjson.Serializable;
+
 import java.util.Date;
 import java.text.SimpleDateFormat;
 

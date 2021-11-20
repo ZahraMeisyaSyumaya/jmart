@@ -1,5 +1,7 @@
 package com.zahraJmartRK;
 
+import com.zahraJmartRK.dbjson.Serializable;
+
 public abstract class Coupon extends Serializable
 {
     public final String name;

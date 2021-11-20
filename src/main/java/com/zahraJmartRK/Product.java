@@ -1,5 +1,7 @@
 package com.zahraJmartRK;
 
+import com.zahraJmartRK.dbjson.Serializable;
+
 public class Product extends Serializable
 {
     public int accountId;

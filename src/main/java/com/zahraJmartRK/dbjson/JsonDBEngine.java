@@ -1,4 +1,4 @@
-package jmart.goldenSample.dbjson;
+package com.zahraJmartRK.dbjson;
 
 import java.io.IOException;
 import java.lang.reflect.Field;

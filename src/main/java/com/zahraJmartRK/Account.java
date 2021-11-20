@@ -1,4 +1,6 @@
 package com.zahraJmartRK;
+import com.zahraJmartRK.dbjson.Serializable;
+
 import java.util.regex.*;
 import java.util.regex.Pattern;
 
@@ -32,6 +34,7 @@ public class Account extends Serializable
         }
         return false;
     }
+
     @Override
     public String toString(){
         return ("name: " + name + "\nemail: " + email + "\npassword: " + password);
