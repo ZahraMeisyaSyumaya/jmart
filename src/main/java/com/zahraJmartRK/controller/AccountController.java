@@ -5,40 +5,16 @@ import com.zahraJmartRK.Store;
 import com.zahraJmartRK.dbjson.JsonAutowired;
 import com.zahraJmartRK.dbjson.JsonTable;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.regex.Pattern;
-/*
-@RestController
-@RequestMapping("/account")
-public class AccountController {
-    @GetMapping
-    String index() { return "account page"; }
-
-    @PostMapping("/register")
-    Account register
-            (
-                    @RequestParam String name,
-                    @RequestParam String email,
-                    @RequestParam String password
-            )
-    {
-        return new Account(name, email, password, 0);
-    }
-
-    @GetMapping("/{id}")
-    String getById(@PathVariable int id) { return "account id " + id + " not found!"; }
-}
-*/
 
 @RestController
 @RequestMapping("/account")
 public abstract class AccountController implements BasicGetController<Account>
 {
-    public static @JsonAutowired(value=Account.class, filepath="C:/Users/Zahra/repo baru/jmart/src/main")
-    JsonTable<Account> accountTable;
-    public static final String REGEX_EMAIL = "^[a-zA-Z0-9&~]+(?:\\.[a-zA-Z0-9&~]+)@[A-Za-z0-9]{1}[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9-]+)$";
+    public static @JsonAutowired(value=Account.class, filepath="C:\\users\\Zahra\\repo baru\\Json\\account.json") JsonTable<Account> accountTable;
+    public static final String REGEX_EMAIL = "^[a-zA-Z0-9&*~]+(?:\\.[a-zA-Z0-9&*~]+)@[A-Za-z0-9]{1}[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9-]+)$";
     public static final String REGEX_PASSWORD = "^(?=.[a-z])(?=.[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
     public static final Pattern REGEX_PATTERN_EMAIL = Pattern.compile(REGEX_EMAIL);
     public static final Pattern REGEX_PATTERN_PASSWORD = Pattern.compile(REGEX_PASSWORD);
@@ -46,6 +22,7 @@ public abstract class AccountController implements BasicGetController<Account>
     public JsonTable<Account> getJsonTable(){
         return accountTable;
     }
+
     @PostMapping("/login")
     Account login
             (
@@ -54,9 +31,22 @@ public abstract class AccountController implements BasicGetController<Account>
             )
     {
         for(Account account : accountTable){
-            if(account.email.equals(email) && account.password.equals(password)){
-                return account;
+            try{
+                MessageDigest md = MessageDigest.getInstance("MD5");
+                md.update(password.getBytes());
+                byte[] bytes = md.digest();
+                StringBuilder sb = new StringBuilder();
+                for(int cnt = 0; cnt < bytes.length; cnt++){
+                    sb.append(Integer.toString((bytes[cnt] & 0xff) + 0x100, 16).substring(1));
+                }
+                String generatedPassword = sb.toString();
+                if(account.email.equals(email) && account.password.equals(generatedPassword)){ //Compare hash in string with equals
+                    return account;
+                }
+            } catch (NoSuchAlgorithmException e){
+                e.printStackTrace();
             }
+
         }
         return null;
     }
@@ -75,7 +65,19 @@ public abstract class AccountController implements BasicGetController<Account>
                     return null;
                 }
             }
-            return new Account(name, email, password, 0);
+            try{
+                MessageDigest md = MessageDigest.getInstance("MD5");
+                md.update(password.getBytes());
+                byte[] bytes = md.digest();
+                StringBuilder sb = new StringBuilder();
+                for(int cnt = 0; cnt < bytes.length; cnt++){
+                    sb.append(Integer.toString((bytes[cnt] & 0xff) + 0x100, 16).substring(1));
+                }
+                String generatedPassword = sb.toString();
+                return new Account(name, email, generatedPassword, 0);
+            }catch (NoSuchAlgorithmException e){
+                e.printStackTrace();
+            }
         }
         return null;
     }
@@ -103,6 +105,4 @@ public abstract class AccountController implements BasicGetController<Account>
     }
 
 }
-
-
 
