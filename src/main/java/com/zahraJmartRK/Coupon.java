@@ -11,6 +11,8 @@ public abstract class Coupon extends Serializable
     public final double minimum;
     private boolean used;
 
+    public abstract boolean canApply(double price, double discount);
+
     public static enum Type {
         DISCOUNT, REBATE
     }
