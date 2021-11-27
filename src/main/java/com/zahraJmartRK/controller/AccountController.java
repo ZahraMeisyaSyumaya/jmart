@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 @RequestMapping("/account")
 public abstract class AccountController implements BasicGetController<Account>
 {
-    public static @JsonAutowired(value=Account.class, filepath="C:\\Users\\Zahra\\repo baru\\jmart\\src\\main\\account.json") JsonTable<Account> accountTable;
+    public static @JsonAutowired(value=Account.class, filepath="C:\\Users\\Zahra\\repo_baru\\jmart\\src\\main\\account.json") JsonTable<Account> accountTable;
     public static final String REGEX_EMAIL = "^[a-zA-Z0-9&*~]+(?:\\.[a-zA-Z0-9&*~]+)@[A-Za-z0-9]{1}[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9-]+)$";
     public static final String REGEX_PASSWORD = "^(?=.[a-z])(?=.[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
     public static final Pattern REGEX_PATTERN_EMAIL = Pattern.compile(REGEX_EMAIL);

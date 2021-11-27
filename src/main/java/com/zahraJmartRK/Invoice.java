@@ -9,22 +9,19 @@ public abstract class Invoice extends Serializable
     public int buyerId;
     public int complaintId;
     public final Date date;
+    //    public ArrayList<Record> history = new ArrayList<>();
     public int productId;
     public Rating rating;
-    enum Status {
-        WAITING_CONFIRMATION,
-        CANCELLED,
-        ON_PROGRESS,
-        ON_DELIVERY,
-        COMPLAINT,
-        FINISHED,
-        FAILED,
-        DELIVERED
+    public enum Status{
+        WAITING_CONFIRMATION, CANCELLED, ON_PROGRESS, ON_DELIVERY,
+        COMPLAINT, FINISHED, FAILED, DELIVERED
     }
-    enum Rating{
-        NONE, BAD, NEUTRAL, GOOD
+    public enum Rating{
+        NONE,
+        BAD,
+        NEUTRAL,
+        GOOD
     }
-
     class Record{
         public Date date;
         public String message;
